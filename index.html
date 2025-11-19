@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Домашние задания класса</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <h1>📚 Домашние задания</h1>
+    
+    <div id="auth-section">
+        <h3>🔐 Режим редактора</h3>
+        <p>Введите ключ для редактирования:</p>
+        <input type="password" id="access-key" placeholder="Ключ доступа">
+        <button onclick="checkAccess()">Разблокировать редактирование</button>
+        <p><small>Для теста используйте ключ: class2024</small></p>
+    </div>
+    
+    <div id="editor-section" style="display:none;">
+        <h3>✏️ Редактирование заметок</h3>
+        <textarea id="notes-editor" placeholder="Введите домашние задания здесь..."></textarea>
+        <br>
+        <button onclick="saveNotes()">💾 Сохранить изменения</button>
+        <button onclick="logout()" class="logout-btn">🚪 Выйти</button>
+        <p><small>После сохранения все увидят обновления автоматически</small></p>
+    </div>
+    
+    <div id="viewer-section">
+        <h3>📖 Текущие задания</h3>
+        <div id="notes-display">
+            <div class="no-notes">⏳ Загрузка...</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
