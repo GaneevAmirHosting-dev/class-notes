@@ -3,35 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📚 Домашние задания класса</title>
+    <title>🎓 Школьный портал - Домашние задания</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    <h1>📚 Домашние задания</h1>
-    
-    <div id="auth-section">
-        <h3>🔐 Режим редактора</h3>
-        <p>Введите ключ для редактирования:</p>
-        <input type="password" id="access-key" placeholder="Ключ доступа">
-        <button onclick="checkAccess()">Разблокировать редактирование</button>
-        <p><small>Для теста используйте ключ: class2024</small></p>
-    </div>
-    
-    <div id="editor-section" style="display:none;">
-        <h3>✏️ Редактирование заметок</h3>
-        <textarea id="notes-editor" placeholder="Введите домашние задания здесь..."></textarea>
-        <br>
-        <button onclick="saveNotes()">💾 Сохранить изменения</button>
-        <button onclick="logout()" class="logout-btn">🚪 Выйти</button>
-        <p><small>После сохранения все увидят обновления автоматически</small></p>
-    </div>
-    
-    <div id="viewer-section">
-        <h3>📖 Текущие задания</h3>
-        <div id="notes-display">
-            <div class="no-notes">⏳ Загрузка...</div>
+    <div id="app">
+        <!-- Экран выбора класса -->
+        <div id="class-selection" class="screen">
+            <h1>🎓 Школьный портал</h1>
+            <div class="class-grid">
+                <div class="class-card" data-class="10-M">10-M</div>
+            </div>
+        </div>
+
+        <!-- Экран выбора роли -->
+        <div id="role-selection" class="screen hidden">
+            <h2>Выберите вашу роль</h2>
+            <div class="role-buttons">
+                <button class="role-btn" data-role="student"> Ученик</button>
+                <button class="role-btn" data-role="elder"> Староста</button>
+                <button class="role-btn" data-role="admin"> Администратор</button>
+            </div>
+            <button id="back-to-class" class="back-btn">← Назад к классам</button>
+        </div>
+
+        <!-- Экран ввода ключа -->
+        <div id="key-input" class="screen hidden">
+            <h2>Введите ключ доступа</h2>
+            <input type="password" id="access-key" placeholder="Ваш ключ...">
+            <button id="submit-key">🔑 Войти</button>
+            <button id="back-to-role" class="back-btn">← Назад к ролям</button>
+        </div>
+
+        <!-- Главный экран с ДЗ и галереей -->
+        <div id="main-screen" class="screen hidden">
+            <div class="user-info">
+                <div>
+                    <span id="user-class"></span>
+                    <span id="user-role"></span>
+                </div>
+                <button id="logout">🚪 Выйти</button>
+            </div>
+            
+            <!-- Секция домашних заданий -->
+            <div class="homework-section">
+                <h2>📚 Домашние задания</h2>
+                <div id="homework-display"></div>
+                
+                <!-- Редактор для старост/админов -->
+                <div id="editor-section" class="hidden">
+                    <textarea id="homework-editor" placeholder="Введите домашние задания здесь..."></textarea>
+                    <button id="save-homework">💾 Сохранить задания</button>
+                </div>
+            </div>
+
+            <!-- Галерея изображений -->
+            <div class="gallery-section">
+                <h3>🖼️ Галерея класса</h3>
+                
+                <!-- Загрузка изображений через Base64 -->
+                <div id="upload-section" class="hidden">
+                    <div class="upload-area" id="base64-upload-area">
+                        <h4>📸 Загрузить изображение</h4>
+                        <p>Выберите файл или перетащите его сюда</p>
+                        
+                        <div class="upload-options">
+                            <button id="select-file-btn" class="upload-option-btn">
+                                📁 Выбрать файл
+                            </button>
+                            <input type="file" id="base64-file-input" accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <div id="file-preview" class="hidden">
+                            <div class="preview-container">
+                                <img id="preview-img">
+                                <div class="preview-info">
+                                    <p>✅ Файл готов к загрузке</p>
+                                    <button id="confirm-upload-btn" class="upload-confirm-btn">
+                                        🚀 Загрузить в галерею
+                                    </button>
+                                    <button id="cancel-upload-btn" class="upload-cancel-btn">
+                                        ❌ Отмена
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="upload-tips">
+                            <p><strong>💡 Подсказка:</strong></p>
+                            <ul>
+                                <li>📷 Поддерживаются JPG, PNG, GIF</li>
+                                <li>⚡ Максимальный размер: 5MB</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Сетка изображений -->
+                <div id="gallery-container">
+                    <div id="gallery-grid" class="gallery-grid">
+                        <!-- Изображения будут добавляться сюда -->
+                    </div>
+                    <div id="no-images" class="no-homework">
+                        📷 В галерее пока нет изображений
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
