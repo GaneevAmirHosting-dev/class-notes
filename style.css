@@ -1,0 +1,2014 @@
+/* КОСМИЧЕСКИЙ ПОРТАЛ - ДЕРЗКИЙ СТИЛЬ */
+:root {
+    --space-black: #0a0e17;
+    --deep-space: #0f1420;
+    --nebula-blue: #1a1f3d;
+    --cosmic-purple: #6a11cb;
+    --stellar-cyan: #00c6ff;
+    --nova-pink: #ff2e63;
+    --quasar-yellow: #ffcc00;
+    --supernova-orange: #ff6b35;
+    --dark-matter: #050811;
+    --asteroid-gray: #2a2d3a;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #b0b7d9;
+    --text-accent: #00c6ff;
+    
+    --glow-blue: 0 0 15px rgba(0, 198, 255, 0.7);
+    --glow-purple: 0 0 20px rgba(106, 17, 203, 0.8);
+    --glow-pink: 0 0 15px rgba(255, 46, 99, 0.6);
+    
+    --border-glow: 1px solid rgba(0, 198, 255, 0.3);
+    --border-neon: 1px solid rgba(255, 46, 99, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Orbitron', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--space-black) 0%, var(--deep-space) 50%, var(--nebula-blue) 100%);
+    min-height: 100vh;
+    background-attachment: fixed;
+    color: var(--text-primary);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Космический фон с частицами */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(106, 17, 203, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 198, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 46, 99, 0.1) 0%, transparent 50%);
+    z-index: -2;
+    animation: nebula-drift 60s infinite linear;
+}
+
+/* Мигающие звезды */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300%;
+    height: 300%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+        radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+        radial-gradient(1px 1px at 90px 40px, #ddd, transparent),
+        radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+        radial-gradient(1px 1px at 160px 120px, #eee, transparent);
+    background-repeat: repeat;
+    z-index: -3;
+    animation: stars-twinkle 5s infinite alternate;
+}
+
+@keyframes nebula-drift {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes stars-twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ЭКРАНЫ - КОСМИЧЕСКИЕ ПАНЕЛИ */
+.screen {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 14, 23, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: -1;
+    clip-path: polygon(
+        0% 0%, 
+        100% 0%, 
+        100% calc(100% - 30px), 
+        calc(100% - 30px) 100%, 
+        0% 100%
+    );
+}
+
+/* ЗАГОЛОВКИ - НЕОНОВЫЕ */
+h1, h2, h3, h4 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 50px;
+    background: linear-gradient(45deg, var(--stellar-cyan), var(--cosmic-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: title-glow 2s ease-in-out infinite alternate;
+    text-shadow: var(--glow-blue), var(--glow-purple);
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--stellar-cyan), transparent);
+}
+
+h2 {
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, var(--text-primary), var(--text-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h3 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    border-left: 4px solid var(--nova-pink);
+    padding-left: 15px;
+    text-align: left;
+    width: 100%;
+}
+
+@keyframes title-glow {
+    0% { text-shadow: 0 0 10px rgba(0, 198, 255, 0.5); }
+    100% { text-shadow: 0 0 20px rgba(106, 17, 203, 0.8), 0 0 30px rgba(0, 198, 255, 0.6); }
+}
+
+/* КАРТОЧКИ КЛАССОВ - КОСМИЧЕСКИЕ БАТТЛЫ */
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin: 50px 0;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.class-card {
+    background: linear-gradient(145deg, rgba(42, 45, 58, 0.8), rgba(10, 14, 23, 0.9));
+    border: var(--border-glow);
+    border-radius: 10px;
+    padding: 40px 20px;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 900;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 198, 255, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    clip-path: polygon(
+        15px 0%,
+        calc(100% - 15px) 0%,
+        100% 15px,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        15px 100%,
+        0% calc(100% - 15px),
+        0% 15px
+    );
+}
+
+.class-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--stellar-cyan), var(--cosmic-purple), var(--nova-pink));
+    z-index: -1;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.class-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.1),
+        transparent
+    );
+    transition: left 0.6s;
+}
+
+.class-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: var(--success-gradient);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: var(--stellar-cyan);
+    color: var(--quasar-yellow);
+}
+
+.class-card:hover::before {
+    opacity: 1;
+    animation: border-glow 1.5s linear infinite;
+}
+
+.class-card:hover::after {
+    left: 100%;
+}
+
+@keyframes border-glow {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* КНОПКИ РОЛЕЙ - КОМАНДНЫЙ ЦЕНТР */
+.role-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 50px 0;
+    max-width: 900px;
+    width: 100%;
+}
+
+.role-btn {
+    background: linear-gradient(145deg, rgba(26, 31, 61, 0.9), rgba(10, 14, 23, 0.95));
+    border: 2px solid;
+    border-image: linear-gradient(45deg, var(--stellar-cyan), var(--cosmic-purple)) 1;
+    border-radius: 8px;
+    padding: 25px 30px;
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.role-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(0, 198, 255, 0.1), 
+        rgba(106, 17, 203, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.role-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 10px 25px rgba(0, 198, 255, 0.3),
+        inset 0 0 20px rgba(106, 17, 203, 0.2);
+    background: linear-gradient(145deg, 
+        rgba(0, 198, 255, 0.1), 
+        rgba(106, 17, 203, 0.1));
+    color: var(--stellar-cyan);
+}
+
+.role-btn:hover::before {
+    opacity: 1;
+}
+
+.role-btn::after {
+    content: '➤';
+    position: absolute;
+    right: 20px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.role-btn:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ПОЛЕ ВВОДА КЛЮЧА - ТЕРМИНАЛ ДОСТУПА */
+#access-key {
+    width: 100%;
+    max-width: 500px;
+    padding: 18px 25px;
+    margin: 25px 0 30px;
+    border: 2px solid var(--asteroid-gray);
+    border-radius: 8px;
+    background: rgba(5, 8, 17, 0.9);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-family: 'Orbitron', monospace;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.5),
+        0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+}
+
+#access-key::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+#access-key:focus {
+    outline: none;
+    border-color: var(--stellar-cyan);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 198, 255, 0.2),
+        0 0 20px rgba(0, 198, 255, 0.3);
+    background: rgba(5, 8, 17, 0.95);
+}
+
+/* КНОПКИ ОСНОВНЫЕ - ПУСКОВЫЕ КНОПКИ */
+#submit-key, #save-homework, .upload-confirm-btn {
+    width: 100%;
+    max-width: 500px;
+    padding: 18px;
+    background: linear-gradient(45deg, var(--cosmic-purple), var(--stellar-cyan));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.4),
+        0 0 10px rgba(106, 17, 203, 0.5);
+}
+
+#submit-key::before, #save-homework::before, .upload-confirm-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.6s;
+}
+
+#submit-key:hover, #save-homework:hover, .upload-confirm-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 10px 25px rgba(0, 198, 255, 0.4),
+        0 0 20px rgba(106, 17, 203, 0.7);
+    background: linear-gradient(45deg, var(--stellar-cyan), var(--cosmic-purple));
+}
+
+#submit-key:hover::before, #save-homework:hover::before, .upload-confirm-btn:hover::before {
+    left: 100%;
+}
+
+/* КНОПКИ НАЗАД - АВАРИЙНЫЙ ВЫХОД */
+.back-btn, .upload-cancel-btn, #logout {
+    background: linear-gradient(145deg, rgba(255, 70, 85, 0.1), rgba(255, 46, 99, 0.05));
+    border: 2px solid var(--nova-pink);
+    color: var(--nova-pink);
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.back-btn:hover, .upload-cancel-btn:hover, #logout:hover {
+    background: linear-gradient(145deg, rgba(255, 46, 99, 0.2), rgba(255, 70, 85, 0.1));
+    box-shadow: 
+        0 0 15px rgba(255, 46, 99, 0.4),
+        inset 0 0 10px rgba(255, 46, 99, 0.1);
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* ГЛАВНЫЙ ЭКРАН - КОСМИЧЕСКАЯ СТАНЦИЯ */
+.user-info {
+    background: linear-gradient(90deg, 
+        rgba(26, 31, 61, 0.8), 
+        rgba(10, 14, 23, 0.9));
+    border: var(--border-glow);
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.5),
+        inset 0 0 20px rgba(0, 198, 255, 0.1);
+    clip-path: polygon(
+        0% 0%,
+        calc(100% - 20px) 0%,
+        100% 20px,
+        100% 100%,
+        20px 100%,
+        0% calc(100% - 20px)
+    );
+}
+
+#user-class, #user-role {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--stellar-cyan);
+    text-shadow: var(--glow-blue);
+}
+
+#user-class {
+    margin-right: 20px;
+}
+
+/* БЛОК ДОМАШНИХ ЗАДАНИЙ - ИНФОРМАЦИОННЫЙ ТЕРМИНАЛ */
+.homework-section {
+    background: linear-gradient(145deg, 
+        rgba(26, 31, 61, 0.9), 
+        rgba(10, 14, 23, 0.95));
+    border: var(--border-glow);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 0 25px rgba(0, 198, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.homework-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--cosmic-purple), 
+        var(--stellar-cyan), 
+        var(--nova-pink));
+    animation: scanline 3s linear infinite;
+}
+
+@keyframes scanline {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+#homework-display {
+    background: rgba(5, 8, 17, 0.9);
+    border-radius: 8px;
+    padding: 25px;
+    min-height: 200px;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.5),
+        0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(42, 45, 58, 0.5);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.homework-content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    color: var(--text-primary);
+}
+
+.homework-content strong {
+    color: var(--quasar-yellow);
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+}
+
+.homework-content em {
+    color: var(--stellar-cyan);
+    font-style: italic;
+}
+
+.last-updated {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid var(--asteroid-gray);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 1px;
+}
+
+.no-homework {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 50px 30px;
+    font-style: italic;
+    font-size: 1.2rem;
+    border: 2px dashed var(--asteroid-gray);
+    border-radius: 8px;
+    background: rgba(42, 45, 58, 0.2);
+}
+
+/* ==================== */
+/* РЕДАКТОР С ПАНЕЛЬЮ ИНСТРУМЕНТОВ */
+/* ==================== */
+
+.editor-toolbar {
+    background: linear-gradient(145deg, 
+        rgba(42, 45, 58, 0.95), 
+        rgba(26, 31, 61, 0.98));
+    border: var(--border-glow);
+    border-radius: 8px 8px 0 0;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: -1px;
+    border-bottom: 1px solid var(--asteroid-gray);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.3),
+        inset 0 0 20px rgba(0, 198, 255, 0.05);
+}
+
+.toolbar-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 5px 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toolbar-group:last-child {
+    border-right: none;
+}
+
+.toolbar-btn {
+    background: linear-gradient(145deg, 
+        rgba(26, 31, 61, 0.8), 
+        rgba(10, 14, 23, 0.9));
+    border: 1px solid var(--asteroid-gray);
+    border-radius: 6px;
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.toolbar-btn:hover {
+    background: linear-gradient(145deg, 
+        rgba(0, 198, 255, 0.2), 
+        rgba(106, 17, 203, 0.1));
+    border-color: var(--stellar-cyan);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 5px 15px rgba(0, 198, 255, 0.3),
+        inset 0 0 10px rgba(106, 17, 203, 0.2);
+}
+
+/* Стили для переключаемых кнопок */
+.format-toggle, .color-toggle {
+    position: relative;
+    overflow: visible;
+}
+
+.format-toggle[data-active="true"],
+.color-toggle[data-active="true"] {
+    background: linear-gradient(145deg, 
+        rgba(0, 198, 255, 0.3), 
+        rgba(106, 17, 203, 0.2));
+    border-color: var(--quasar-yellow);
+    box-shadow: 
+        inset 0 0 15px rgba(255, 204, 0, 0.3),
+        0 0 10px rgba(255, 204, 0, 0.4);
+}
+
+.active-indicator {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 8px;
+    height: 8px;
+    background: var(--quasar-yellow);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 0 5px var(--quasar-yellow);
+}
+
+.format-toggle[data-active="true"] .active-indicator,
+.color-toggle[data-active="true"] .active-indicator {
+    opacity: 1;
+    animation: indicator-pulse 1s infinite alternate;
+}
+
+@keyframes indicator-pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+.color-picker {
+    display: flex;
+    gap: 5px;
+}
+
+.color-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn span {
+    font-size: 1.2rem;
+}
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 0;
+}
+
+#homework-editor {
+    width: 100%;
+    height: 250px;
+    padding: 20px;
+    border: 2px solid var(--asteroid-gray);
+    border-radius: 0 0 8px 8px;
+    background: rgba(5, 8, 17, 0.95);
+    color: var(--text-primary);
+    resize: vertical;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 1rem;
+    line-height: 1.6;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    tab-size: 4;
+}
+
+#homework-editor:focus {
+    outline: none;
+    border-color: var(--stellar-cyan);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 198, 255, 0.2),
+        0 0 15px rgba(0, 198, 255, 0.3);
+}
+
+.editor-preview {
+    background: rgba(5, 8, 17, 0.9);
+    border: 1px solid var(--asteroid-gray);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.editor-preview h4 {
+    margin-bottom: 15px;
+    color: var(--stellar-cyan);
+    font-size: 1.1rem;
+    text-align: left;
+    border: none;
+    padding: 0;
+}
+
+.preview-content {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    min-height: 100px;
+    padding: 15px;
+    background: rgba(26, 31, 61, 0.3);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-content strong {
+    color: var(--quasar-yellow);
+    font-weight: bold;
+}
+
+.preview-content em {
+    color: var(--stellar-cyan);
+    font-style: italic;
+}
+
+.preview-content u {
+    color: var(--nova-pink);
+    text-decoration: underline;
+}
+
+.preview-content ul, .preview-content ol {
+    padding-left: 25px;
+    margin: 10px 0;
+}
+
+.preview-content li {
+    margin: 5px 0;
+}
+
+.preview-content code {
+    background: rgba(0, 198, 255, 0.1);
+    color: var(--stellar-cyan);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9rem;
+}
+
+.editor-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+.preview-btn, .save-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.preview-btn {
+    background: linear-gradient(145deg, 
+        rgba(42, 45, 58, 0.8), 
+        rgba(26, 31, 61, 0.9));
+    border: 2px solid var(--asteroid-gray);
+    color: var(--text-secondary);
+}
+
+.preview-btn:hover {
+    background: linear-gradient(145deg, 
+        rgba(0, 198, 255, 0.1), 
+        rgba(106, 17, 203, 0.05));
+    border-color: var(--stellar-cyan);
+    color: var(--stellar-cyan);
+    transform: translateY(-2px);
+}
+
+.save-btn {
+    background: linear-gradient(45deg, var(--cosmic-purple), var(--stellar-cyan));
+    color: white;
+    border: 2px solid transparent;
+}
+
+.save-btn:hover {
+    background: linear-gradient(45deg, var(--stellar-cyan), var(--cosmic-purple));
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 20px rgba(0, 198, 255, 0.4),
+        0 0 15px rgba(106, 17, 203, 0.5);
+}
+
+.formatting-help {
+    margin-top: 25px;
+    background: linear-gradient(145deg, 
+        rgba(26, 31, 61, 0.5), 
+        rgba(10, 14, 23, 0.7));
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid rgba(0, 198, 255, 0.2);
+}
+
+.formatting-help details {
+    cursor: pointer;
+}
+
+.formatting-help summary {
+    color: var(--stellar-cyan);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(0, 198, 255, 0.1);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.formatting-help summary::-webkit-details-marker {
+    display: none;
+}
+
+.formatting-help summary::after {
+    content: '▼';
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.formatting-help details[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.help-content {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(5, 8, 17, 0.9);
+    border-radius: 6px;
+    border: 1px solid var(--asteroid-gray);
+}
+
+.help-content p {
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.help-content ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.help-content li {
+    margin: 8px 0;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.help-content code {
+    background: rgba(0, 198, 255, 0.1);
+    color: var(--stellar-cyan);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9rem;
+}
+
+.help-content strong, .help-content em, .help-content u {
+    display: inline-block;
+    padding: 0 5px;
+}
+
+/* Индикатор режима ввода */
+.input-mode-indicator {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--stellar-cyan);
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: var(--stellar-cyan);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
+}
+
+.input-mode-indicator.active {
+    display: flex;
+    animation: slide-in-right 0.3s ease;
+}
+
+.input-mode-indicator .mode-icon {
+    font-size: 1.2rem;
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Адаптивность для редактора */
+@media (max-width: 768px) {
+    .editor-toolbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+    }
+    
+    .toolbar-group {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 10px 0;
+        justify-content: center;
+    }
+    
+    .toolbar-group:last-child {
+        border-bottom: none;
+    }
+    
+    .editor-buttons {
+        flex-direction: column;
+    }
+    
+    .preview-btn, .save-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .editor-container {
+        flex-direction: column;
+    }
+    
+    #homework-editor {
+        height: 200px;
+    }
+}
+
+/* Анимация для переключения предпросмотра */
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.editor-preview {
+    animation: slide-up 0.3s ease-out;
+}
+
+/* Стили для цветного текста в preview */
+.preview-content span[style*="color"] {
+    padding: 0 2px;
+    font-weight: bold;
+}
+
+/* ГАЛЕРЕЯ - ГАЛЕКТИЧЕСКИЙ АРХИВ */
+.gallery-section {
+    background: linear-gradient(145deg, 
+        rgba(26, 31, 61, 0.9), 
+        rgba(10, 14, 23, 0.95));
+    border: var(--border-glow);
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 30px;
+    width: 100%;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 0 25px rgba(0, 198, 255, 0.1);
+    position: relative;
+}
+
+.gallery-section::after {
+    content: 'GALACTIC ARCHIVE';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    transform: rotate(-90deg);
+    transform-origin: right top;
+}
+
+/* ЗОНА ЗАГРУЗКИ - ТРАНСПОРТЕР */
+.upload-area {
+    border: 3px dashed var(--stellar-cyan);
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    background: rgba(26, 31, 61, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 198, 255, 0.05) 10px,
+        rgba(0, 198, 255, 0.05) 20px
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: var(--nova-pink);
+    background: rgba(106, 17, 203, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 10px 25px rgba(106, 17, 203, 0.3),
+        inset 0 0 30px rgba(0, 198, 255, 0.1);
+}
+
+.upload-area:hover::before {
+    opacity: 1;
+    animation: scan-transport 2s linear infinite;
+}
+
+@keyframes scan-transport {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 20px; }
+}
+
+.upload-area.dragover {
+    border-color: var(--quasar-yellow);
+    background: rgba(255, 204, 0, 0.1);
+    animation: pulse-transport 0.6s ease infinite alternate;
+}
+
+@keyframes pulse-transport {
+    0% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.3); }
+    100% { box-shadow: 0 0 40px rgba(255, 204, 0, 0.6); }
+}
+
+.upload-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.upload-option-btn {
+    background: linear-gradient(45deg, var(--asteroid-gray), var(--nebula-blue));
+    color: var(--text-primary);
+    border: 2px solid var(--stellar-cyan);
+    padding: 15px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-option-btn::after {
+    content: '↑';
+    position: absolute;
+    right: 15px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.upload-option-btn:hover {
+    background: linear-gradient(45deg, var(--nebula-blue), var(--asteroid-gray));
+    border-color: var(--nova-pink);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 20px rgba(255, 46, 99, 0.3),
+        inset 0 0 15px rgba(0, 198, 255, 0.2);
+}
+
+.upload-option-btn:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+    animation: upload-bounce 1s infinite alternate;
+}
+
+@keyframes upload-bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+/* ПРЕВЬЮ ФАЙЛА - ГОЛОГРАММА */
+#file-preview {
+    margin-top: 30px;
+    animation: hologram-appear 0.5s ease-out;
+}
+
+@keyframes hologram-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.preview-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: linear-gradient(145deg, 
+        rgba(26, 31, 61, 0.8), 
+        rgba(10, 14, 23, 0.9));
+    border-radius: 10px;
+    padding: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: var(--border-glow);
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.4),
+        inset 0 0 20px rgba(0, 198, 255, 0.1);
+}
+
+#preview-img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.5),
+        0 0 15px rgba(0, 198, 255, 0.4);
+    border: 2px solid var(--stellar-cyan);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#preview-img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 50%,
+        rgba(0, 198, 255, 0.1) 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#preview-img:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 
+        0 15px 35px rgba(106, 17, 203, 0.5),
+        0 0 20px rgba(0, 198, 255, 0.6);
+}
+
+#preview-img:hover::after {
+    opacity: 1;
+    animation: hologram-scan 2s linear infinite;
+}
+
+@keyframes hologram-scan {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 20px; }
+}
+
+.upload-tips {
+    background: linear-gradient(145deg, 
+        rgba(42, 45, 58, 0.8), 
+        rgba(26, 31, 61, 0.9));
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+    border-left: 4px solid var(--quasar-yellow);
+}
+
+.upload-tips p {
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--quasar-yellow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-tips ul {
+    list-style: none;
+    padding: 0;
+}
+
+.upload-tips li {
+    margin: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: var(--text-secondary);
+}
+
+.upload-tips li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--stellar-cyan);
+    animation: spin-star 2s linear infinite;
+}
+
+@keyframes spin-star {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* СЕТКА ГАЛЕРЕИ - ГАЛАКТИЧЕСКАЯ ПАНОРАМА */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        inset 0 0 15px rgba(0, 198, 255, 0.1);
+    border: 2px solid transparent;
+    background: linear-gradient(145deg, 
+        rgba(26, 31, 61, 0.8), 
+        rgba(10, 14, 23, 0.9));
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--cosmic-purple), 
+        var(--stellar-cyan), 
+        var(--nova-pink));
+    border-radius: 12px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px) scale(1.05) rotate(2deg);
+    box-shadow: 
+        0 20px 50px rgba(106, 17, 203, 0.5),
+        0 0 30px rgba(0, 198, 255, 0.6),
+        inset 0 0 25px rgba(255, 46, 99, 0.2);
+    z-index: 10;
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+    animation: galaxy-border 2s linear infinite;
+}
+
+@keyframes galaxy-border {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2) saturate(1.2);
+}
+
+.delete-image {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(45deg, var(--nova-pink), #ff416c);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(255, 46, 99, 0.4);
+}
+
+.gallery-item:hover .delete-image {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.delete-image:hover {
+    background: linear-gradient(45deg, #ff416c, var(--nova-pink));
+    transform: scale(1.2) !important;
+    box-shadow: 
+        0 6px 20px rgba(255, 46, 99, 0.6),
+        0 0 15px rgba(255, 46, 99, 0.8);
+    animation: danger-pulse 0.5s ease infinite alternate;
+}
+
+@keyframes danger-pulse {
+    0% { box-shadow: 0 6px 20px rgba(255, 46, 99, 0.6); }
+    100% { box-shadow: 0 6px 20px rgba(255, 46, 99, 0.9), 0 0 20px rgba(255, 46, 99, 1); }
+}
+
+.image-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(10, 14, 23, 0.9));
+    color: white;
+    padding: 15px 10px 8px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    line-height: 1.4;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+}
+
+.gallery-item:hover .image-info {
+    opacity: 1;
+}
+
+/* СООБЩЕНИЯ - ГОЛОГРАММНЫЕ УВЕДОМЛЕНИЯ */
+.message {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    padding: 20px 35px;
+    border-radius: 8px;
+    z-index: 10000;
+    font-weight: 700;
+    backdrop-filter: blur(20px) brightness(1.2);
+    border: 2px solid;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.4),
+        0 0 20px currentColor;
+    text-align: center;
+    min-width: 350px;
+    max-width: 90vw;
+    opacity: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Orbitron', monospace;
+}
+
+.success-message {
+    background: linear-gradient(145deg, 
+        rgba(0, 200, 83, 0.9), 
+        rgba(0, 150, 136, 0.9));
+    border-color: #00e676;
+    color: white;
+}
+
+.error-message {
+    background: linear-gradient(145deg, 
+        rgba(244, 67, 54, 0.9), 
+        rgba(183, 28, 28, 0.9));
+    border-color: #ff5252;
+    color: white;
+}
+
+.info-message {
+    background: linear-gradient(145deg, 
+        rgba(33, 150, 243, 0.9), 
+        rgba(13, 71, 161, 0.9));
+    border-color: #448aff;
+    color: white;
+}
+
+.warning-message {
+    background: linear-gradient(145deg, 
+        rgba(255, 152, 0, 0.9), 
+        rgba(230, 81, 0, 0.9));
+    border-color: #ffab40;
+    color: white;
+}
+
+/* АДАПТИВНОСТЬ - РЕСПОНСИВНАЯ ГАЛАКТИКА */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+    }
+    
+    .class-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .class-card {
+        padding: 30px 15px;
+        font-size: 2rem;
+    }
+    
+    .role-buttons {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .role-btn {
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+    
+    .user-info {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    #user-class, #user-role {
+        display: block;
+        margin: 5px 0;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .preview-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .upload-options {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .upload-option-btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+    }
+    
+    .message {
+        min-width: 280px;
+        padding: 15px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .class-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .screen {
+        padding: 15px;
+    }
+    
+    .homework-section,
+    .gallery-section {
+        padding: 20px;
+    }
+    
+    #submit-key, #save-homework {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+}
+
+/* БЫСТРЫЙ ВХОД - ТЕЛЕПОРТ */
+.quick-login-btn {
+    background: linear-gradient(145deg, 
+        rgba(106, 17, 203, 0.8), 
+        rgba(0, 198, 255, 0.8));
+    border: none;
+    border-radius: 10px;
+    padding: 25px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 10px 30px rgba(106, 17, 203, 0.4),
+        inset 0 0 20px rgba(0, 198, 255, 0.2);
+    width: 100%;
+    max-width: 450px;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(
+        0% 0%,
+        calc(100% - 15px) 0%,
+        100% 15px,
+        100% 100%,
+        15px 100%,
+        0% calc(100% - 15px)
+    );
+}
+
+.quick-login-btn:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(0, 198, 255, 0.5),
+        inset 0 0 30px rgba(106, 17, 203, 0.3);
+    background: linear-gradient(145deg, 
+        rgba(0, 198, 255, 0.8), 
+        rgba(106, 17, 203, 0.8));
+    animation: teleport-pulse 0.5s ease;
+}
+
+@keyframes teleport-pulse {
+    0% { transform: translateY(-5px) scale(1.02); }
+    50% { transform: translateY(-5px) scale(1.04); }
+    100% { transform: translateY(-5px) scale(1.02); }
+}
+
+.quick-login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.6s;
+}
+
+.quick-login-btn:hover::before {
+    left: 100%;
+}
+
+.quick-login-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.quick-login-icon {
+    font-size: 2.5rem;
+    animation: rocket-fly 2s ease-in-out infinite;
+}
+
+@keyframes rocket-fly {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+    }
+    25% { 
+        transform: translateY(-5px) rotate(-5deg); 
+    }
+    75% { 
+        transform: translateY(5px) rotate(5deg); 
+    }
+}
+
+.quick-login-info {
+    flex: 1;
+    text-align: left;
+}
+
+.quick-login-title {
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    color: var(--quasar-yellow);
+    text-shadow: var(--glow-blue);
+}
+
+.quick-login-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.quick-login-details span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border-left: 3px solid var(--stellar-cyan);
+}
+
+/* АВТОЗАПОЛНЕНИЕ */
+.autofill-info {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto 30px;
+    animation: slide-down 0.3s ease;
+}
+
+@keyframes slide-down {
+    0% { 
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.autofill-badge {
+    background: linear-gradient(145deg, 
+        rgba(26, 31, 61, 0.9), 
+        rgba(10, 14, 23, 0.95));
+    border: var(--border-glow);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        inset 0 0 15px rgba(0, 198, 255, 0.1);
+}
+
+.autofill-badge > div {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.autofill-badge span {
+    font-weight: 500;
+    padding: 8px 15px;
+    background: rgba(0, 198, 255, 0.1);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--stellar-cyan);
+    color: var(--text-primary);
+}
+
+.change-btn {
+    background: linear-gradient(145deg, 
+        rgba(255, 46, 99, 0.2), 
+        rgba(255, 204, 0, 0.1));
+    border: 2px solid var(--nova-pink);
+    color: var(--nova-pink);
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.change-btn:hover {
+    background: linear-gradient(145deg, 
+        rgba(255, 46, 99, 0.3), 
+        rgba(255, 204, 0, 0.2));
+    transform: translateY(-2px);
+    box-shadow: 
+        0 5px 15px rgba(255, 46, 99, 0.3),
+        inset 0 0 10px rgba(255, 204, 0, 0.1);
+    color: white;
+}
+
+/* ТЕМНАЯ ТЕМА ДЛЯ ПОЛОСЫ ПРОКРУТКИ */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--space-black);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--stellar-cyan), var(--cosmic-purple));
+    border-radius: 6px;
+    border: 2px solid var(--space-black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, var(--cosmic-purple), var(--stellar-cyan));
+    box-shadow: inset 0 0 10px rgba(0, 198, 255, 0.3);
+}
+
+
+/* WYSIWYG РЕДАКТОР */
+.wysiwyg-editor {
+    width: 100%;
+    min-height: 300px;
+    padding: 20px;
+    border: 2px solid var(--asteroid-gray);
+    border-radius: 0 0 8px 8px;
+    background: rgba(5, 8, 17, 0.95);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-y: auto;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.wysiwyg-editor:focus {
+    border-color: var(--stellar-cyan);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 198, 255, 0.2),
+        0 0 15px rgba(0, 198, 255, 0.3);
+}
+
+.wysiwyg-editor ul,
+.wysiwyg-editor ol {
+    padding-left: 25px;
+    margin: 10px 0;
+}
+
+.wysiwyg-editor li {
+    margin: 5px 0;
+}
+
+.wysiwyg-editor hr {
+    border: none;
+    border-top: 2px solid var(--stellar-cyan);
+    margin: 20px 0;
+    opacity: 0.5;
+}
+
+/* Селекторы на панели инструментов */
+.toolbar-select {
+    background: linear-gradient(145deg, 
+        rgba(26, 31, 61, 0.8), 
+        rgba(10, 14, 23, 0.9));
+    border: 1px solid var(--asteroid-gray);
+    border-radius: 6px;
+    color: var(--space-black);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    min-width: 120px;
+    transition: all 0.2s ease;
+}
+
+.toolbar-select:hover {
+    border-color: var(--stellar-cyan);
+    background: rgba(0, 198, 255, 0.1);
+}
+
+.toolbar-select:focus {
+    outline: none;
+    border-color: var(--quasar-yellow);
+}
+
+/* Цветовые пикеры */
+.color-picker {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.color-picker input[type="color"] {
+    width: 35px;
+    height: 35px;
+    border: 1px solid var(--asteroid-gray);
+    border-radius: 6px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.color-picker input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+.color-picker input[type="color"]::-webkit-color-swatch {
+    border: 1px solid var(--stellar-cyan);
+    border-radius: 4px;
+}
+
+/* Индикатор активных стилей */
+.format-toggle.active {
+    background: linear-gradient(145deg, 
+        rgba(0, 198, 255, 0.3), 
+        rgba(106, 17, 203, 0.2));
+    border-color: var(--quasar-yellow);
+    box-shadow: 
+        inset 0 0 10px rgba(255, 204, 0, 0.2),
+        0 0 8px rgba(255, 204, 0, 0.3);
+}
+
+/* Подсказка на курсоре при форматировании */
+.formatting-cursor::after {
+    content: '';
+    position: fixed;
+    top: var(--cursor-y, 0);
+    left: var(--cursor-x, 0);
+    width: 20px;
+    height: 20px;
+    background: var(--format-color, var(--stellar-cyan));
+    border-radius: 50%;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 10000;
+    animation: cursor-pulse 1s infinite;
+}
+
+@keyframes cursor-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+}
+
+/* Стили для текста в редакторе */
+.wysiwyg-editor strong {
+    font-weight: bold;
+}
+
+.wysiwyg-editor em {
+    font-style: italic;
+}
+
+.wysiwyg-editor u {
+    text-decoration: underline;
+}
+
+.wysiwyg-editor s {
+    text-decoration: line-through;
+}
+
+/* Размеры шрифтов */
+.font-size-1 { font-size: 12px; }
+.font-size-2 { font-size: 14px; }
+.font-size-3 { font-size: 16px; }
+.font-size-4 { font-size: 20px; }
+.font-size-5 { font-size: 24px; }
+.font-size-6 { font-size: 32px; }
+
+/* Выравнивание текста */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* Адаптивность для WYSIWYG редактора */
+@media (max-width: 768px) {
+    .editor-toolbar {
+        overflow-x: auto;
+        padding: 10px;
+    }
+    
+    .toolbar-group {
+        flex-wrap: nowrap;
+        min-width: max-content;
+    }
+    
+    .wysiwyg-editor {
+        min-height: 250px;
+        font-size: 0.9rem;
+    }
+    
+    .toolbar-select {
+        min-width: 100px;
+        font-size: 0.8rem;
+        padding: 6px 8px;
+    }
+}
+
+/* Стили для выделенного текста */
+.wysiwyg-editor ::selection {
+    background: rgba(0, 198, 255, 0.3);
+    color: white;
+}
+
+/* Плейсхолдер для пустого редактора */
+.wysiwyg-editor:empty:before {
+    content: attr(placeholder);
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.wysiwyg-editor:focus:empty:before {
+    opacity: 0.5;
+}

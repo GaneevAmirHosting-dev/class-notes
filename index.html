@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Школьный портал - Домашние задания</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Экран выбора класса -->
+        <div id="class-selection" class="screen">
+            <h1>🎓 Школьный портал</h1>
+            <div id="quick-login-container"></div>
+            <div class="class-grid">
+                <div class="class-card" data-class="10-M">10-M</div>
+            </div>
+        </div>
+
+        <!-- Экран выбора роли -->
+        <div id="role-selection" class="screen hidden">
+            <h2>Выберите вашу роль</h2>
+            <div class="role-buttons">
+                <button class="role-btn" data-role="student"> Ученик</button>
+                <button class="role-btn" data-role="elder"> Староста</button>
+                <button class="role-btn" data-role="admin"> Администратор</button>
+            </div>
+            <button id="back-to-class" class="back-btn">← Назад к классам</button>
+        </div>
+
+        <!-- Экран ввода ключа -->
+        <div id="key-input" class="screen hidden">
+            <h2>Введите ключ доступа</h2>
+            <div id="autofill-container"></div>
+            <input type="password" id="access-key" placeholder="Ваш ключ...">
+            <button id="submit-key">🔑 Войти</button>
+            <button id="back-to-role" class="back-btn">← Назад к ролям</button>
+        </div>
+
+        <!-- Главный экран с ДЗ и галереей -->
+        <div id="main-screen" class="screen hidden">
+            <div class="user-info">
+                <div>
+                    <span id="user-class"></span>
+                    <span id="user-role"></span>
+                </div>
+                <button id="logout">🚪 Выйти</button>
+            </div>
+            
+            <!-- Секция домашних заданий -->
+            <div class="homework-section">
+                <h2>📚 Домашние задания</h2>
+                <div id="homework-display"></div>
+                
+                <!-- Редактор для старост/админов -->
+                <div id="editor-section" class="hidden">
+                    <!-- ПАНЕЛЬ ИНСТРУМЕНТОВ WYSIWYG -->
+                    <div class="editor-toolbar">
+                        <div class="toolbar-group">
+                            <button class="toolbar-btn format-toggle" data-command="bold" title="Жирный (Ctrl+B)">
+                                <strong>B</strong>
+                            </button>
+                            <button class="toolbar-btn format-toggle" data-command="italic" title="Курсив (Ctrl+I)">
+                                <em>I</em>
+                            </button>
+                            <button class="toolbar-btn format-toggle" data-command="underline" title="Подчеркнутый (Ctrl+U)">
+                                <u>U</u>
+                            </button>
+                        </div>
+                        
+                        <div class="toolbar-group">
+                            <select id="font-size" class="toolbar-select" title="Размер шрифта">
+                                <option value="">Размер</option>
+                                <option value="1">Очень маленький</option>
+                                <option value="2">Маленький</option>
+                                <option value="3">Средний</option>
+                                <option value="4">Большой</option>
+                                <option value="5">Очень большой</option>
+                                <option value="6">Огромный</option>
+                            </select>
+                            
+                            <select id="font-family" class="toolbar-select" title="Шрифт">
+                                <option value="">Шрифт</option>
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                                <option value="Georgia, serif">Georgia</option>
+                            </select>
+                        </div>
+                        
+                        <div class="toolbar-group">
+                            <div class="color-picker">
+                                <input type="color" id="text-color" title="Цвет текста" value="#ffffff">
+                                <input type="color" id="bg-color" title="Цвет фона" value="#050811">
+                                
+                                <button class="toolbar-btn color-btn" data-color="#ff5252" title="Красный">
+                                    <span style="color: #ff5252;">A</span>
+                                </button>
+                                <button class="toolbar-btn color-btn" data-color="#448aff" title="Синий">
+                                    <span style="color: #448aff;">A</span>
+                                </button>
+                                <button class="toolbar-btn color-btn" data-color="#00e676" title="Зеленый">
+                                    <span style="color: #00e676;">A</span>
+                                </button>
+                                <button class="toolbar-btn color-btn" data-color="#ffcc00" title="Желтый">
+                                    <span style="color: #ffcc00;">A</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="toolbar-group">
+                            <button class="toolbar-btn" data-command="insertUnorderedList" title="Маркированный список">
+                                📋
+                            </button>
+                            <button class="toolbar-btn" data-command="insertOrderedList" title="Нумерованный список">
+                                1️⃣
+                            </button>
+                            <button class="toolbar-btn" data-command="insertHorizontalRule" title="Горизонтальная линия">
+                                ➖
+                            </button>
+                        </div>
+                        
+                        <div class="toolbar-group">
+                            <button class="toolbar-btn" data-command="justifyLeft" title="Выровнять по левому краю">
+                                ↶
+                            </button>
+                            <button class="toolbar-btn" data-command="justifyCenter" title="Выровнять по центру">
+                                ⇔
+                            </button>
+                            <button class="toolbar-btn" data-command="justifyRight" title="Выровнять по правому краю">
+                                ↷
+                            </button>
+                        </div>
+                        
+                        <div class="toolbar-group">
+                            <button class="toolbar-btn" data-command="removeFormat" title="Очистить форматирование">
+                                🧹
+                            </button>
+                            <button class="toolbar-btn" data-command="undo" title="Отменить (Ctrl+Z)">
+                                ↩️
+                            </button>
+                            <button class="toolbar-btn" data-command="redo" title="Повторить (Ctrl+Y)">
+                                ↪️
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- WYSIWYG РЕДАКТОР -->
+                    <div class="editor-container">
+                        <div id="homework-editor" contenteditable="true" class="wysiwyg-editor">
+                            Введите домашние задания здесь...
+                            <br><br>
+                            • Используйте панель инструментов для форматирования
+                            <br>
+                            • Можно комбинировать стили (жирный+курсив+цвет)
+                            <br>
+                            • Все изменения видны сразу
+                        </div>
+                    </div>
+                    
+                    <!-- КНОПКИ -->
+                    <div class="editor-buttons">
+                        <button id="save-homework" class="save-btn">
+                            💾 Сохранить задания
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Галерея изображений -->
+            <div class="gallery-section">
+                <h3>🖼️ Галерея класса</h3>
+                
+                <!-- Загрузка изображений -->
+                <div id="upload-section" class="hidden">
+                    <div class="upload-area" id="base64-upload-area">
+                        <h4>📸 Загрузить изображение</h4>
+                        <p>Выберите файл или перетащите его сюда</p>
+                        
+                        <div class="upload-options">
+                            <button id="select-file-btn" class="upload-option-btn">
+                                📁 Выбрать файл
+                            </button>
+                            <input type="file" id="base64-file-input" accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <div id="file-preview" class="hidden"></div>
+                        
+                        <div class="upload-tips">
+                            <p><strong>💡 Подсказка:</strong></p>
+                            <ul>
+                                <li>📷 Поддерживаются JPG, PNG, GIF</li>
+                                <li>⚡ Максимальный размер: 5MB</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Сетка изображений -->
+                <div id="gallery-container">
+                    <div id="gallery-grid" class="gallery-grid"></div>
+                    <div id="no-images" class="no-homework">
+                        📷 В галерее пока нет изображений
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модули -->
+    <script src="modules/FirebaseService.js" type="module"></script>
+    <script src="modules/StateManager.js" type="module"></script>
+    <script src="modules/CacheService.js" type="module"></script>
+    <script src="modules/UIAnimations.js" type="module"></script>
+    <script src="modules/AuthService.js" type="module"></script>
+    <script src="modules/HomeworkService.js" type="module"></script>
+    <script src="modules/GalleryService.js" type="module"></script>
+    <script src="modules/EditorService.js" type="module"></script>
+    
+    <!-- Главный файл -->
+    <script src="app.js" type="module"></script>
+</body>
+</html>
