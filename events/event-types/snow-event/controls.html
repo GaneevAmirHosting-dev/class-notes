@@ -1,0 +1,89 @@
+<div class="event-controls">
+    <div class="event-control-header">
+        <h3>❄️ Управление снегопадом</h3>
+        <button id="close-event-controls" class="close-btn">&times;</button>
+    </div>
+    
+    <div class="stats-preview">
+        <div class="stat-item">
+            <span class="stat-label">Активных снежинок:</span>
+            <span id="current-snowflake-count" class="stat-value">100</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Текущая скорость:</span>
+            <span id="current-speed-value" class="stat-value">4x</span>
+            <span class="stat-hint" id="speed-hint">(1 = медленно, 10 = быстро)</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Сила ветра:</span>
+            <span id="current-wind-value" class="stat-value">3</span>
+            <span class="stat-hint">(0 = нет ветра, 10 = ураган)</span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label for="snow-density">
+            <span class="control-icon">🌨️</span>
+            <span class="control-title">Интенсивность снегопада</span>
+        </label>
+        <input type="range" id="snow-density" min="20" max="500" step="10" value="100">
+        <div class="control-value">
+            <span id="snow-display">100</span>
+            <span class="unit">снежинок</span>
+        </div>
+        <div class="control-description">
+            Количество одновременно падающих снежинок
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label for="snow-speed">
+            <span class="control-icon">⚡</span>
+            <span class="control-title">Скорость падения</span>
+        </label>
+        <input type="range" id="snow-speed" min="1" max="10" step="0.5" value="4">
+        <div class="control-value">
+            <span id="speed-display">4</span>
+            <span class="unit">x быстрее</span>
+        </div>
+        <div class="control-description">
+            <span id="speed-description">Средняя скорость</span><br>
+            <small>1 = очень медленно, 10 = очень быстро</small>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label for="wind-strength">
+            <span class="control-icon">💨</span>
+            <span class="control-title">Сила ветра</span>
+        </label>
+        <input type="range" id="wind-strength" min="0" max="10" step="1" value="3">
+        <div class="control-value">
+            <span id="wind-display">3</span>
+            <span class="unit">баллов</span>
+        </div>
+        <div class="control-description">
+            Ветер отклоняет снежинки в сторону<br>
+            <small>0 = нет ветра, 10 = сильный ветер</small>
+        </div>
+    </div>
+    
+    <div class="control-buttons">
+        <button id="btn-storm" class="btn btn-storm">
+            <span>🌪️</span> Запустить бурю
+        </button>
+        <button id="btn-reset" class="btn btn-reset">
+            <span>🔄</span> Сбросить
+        </button>
+        <button id="btn-melt" class="btn btn-melt">
+            <span>☀️</span> Постепенно растаять
+        </button>
+    </div>
+    
+    <div class="event-tips">
+        <p><strong>💡 Подсказка:</strong></p>
+        <p>• Скорость 1 = самый медленный снегопад</p>
+        <p>• Скорость 10 = самый быстрый снегопад</p>
+        <p>• Изменения сохраняются автоматически</p>
+    </div>
+</div>
