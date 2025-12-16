@@ -26,6 +26,23 @@ export class AuthService {
             return false;
         }
         
+        // Если ученик - сразу пропускаем проверку ключа
+        if (role === 'student') {
+            const userData = {
+                type: 'student',
+                key: 'student_auto',
+                userType: 'class',
+                class: className,
+                loginTime: Date.now(),
+                name: 'Ученик'
+            };
+            
+            this.state.setUserData(userData);
+            UIAnimations.showMessage('🎉 Добро пожаловать, ученик!', 'success');
+            return true;
+        }
+        
+        // Для старост и админов проверяем ключ
         UIAnimations.showMessage('🔍 Проверка ключа...', 'info');
         UIAnimations.pulse(document.getElementById('submit-key'));
         
@@ -52,7 +69,7 @@ export class AuthService {
                     };
                 }
             } 
-            // Проверка пользователей класса
+            // Проверка пользователей класса (для старост)
             else if (usersData[className] && usersData[className][key]) {
                 const user = usersData[className][key];
                 if (user.active !== false) {
@@ -74,7 +91,7 @@ export class AuthService {
             }
             
             if (userData) {
-                // Сохраняем данные для быстрого входа
+                // Сохраняем данные для быстрого входа (только для старост и админов)
                 this.state.saveCredentials(key, className, role);
                 this.state.setUserData(userData);
                 
@@ -92,6 +109,7 @@ export class AuthService {
         }
     }
     
+    // Остальные методы остаются без изменений
     async syncPendingChanges() {
         const pendingChanges = this.state.getPendingChanges();
         if (pendingChanges.length === 0) return;
@@ -147,7 +165,11 @@ export class AuthService {
     addQuickLoginButton() {
         const saved = this.state.getSavedCredentials();
         
-        if (saved.key && saved.className && saved.role && !this.quickLoginButtonAdded) {
+        // Показываем кнопку быстрого входа только для сохраненных старост и админов
+        if (saved.key && saved.className && saved.role && 
+            (saved.role === 'elder' || saved.role === 'admin') && 
+            !this.quickLoginButtonAdded) {
+            
             // Удаляем старую кнопку если есть
             const oldBtn = document.getElementById('quick-login-btn');
             if (oldBtn) oldBtn.remove();

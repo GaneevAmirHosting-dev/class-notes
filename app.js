@@ -91,7 +91,23 @@ class SchoolPortalApp {
                 UIAnimations.pulse(e.target);
                 setTimeout(() => {
                     this.stateManager.setSelectedRole(e.target.dataset.role);
-                    this.showKeyInput();
+                    
+                    // Если ученик - сразу идем на главный экран
+                    if (e.target.dataset.role === 'student') {
+                        const userData = {
+                            type: 'student',
+                            key: 'student_auto',
+                            userType: 'class',
+                            class: this.stateManager.getSelectedClass(),
+                            loginTime: Date.now(),
+                            name: 'Ученик'
+                        };
+                        this.stateManager.setUserData(userData);
+                        this.showMainScreen();
+                    } else {
+                        // Для старост и админов показываем экран ввода ключа
+                        this.showKeyInput();
+                    }
                 }, 300);
             });
         });
@@ -105,7 +121,7 @@ class SchoolPortalApp {
             this.showRoleSelection();
         });
         
-        // Ввод ключа
+        // Ввод ключа (только для старост и админов)
         document.getElementById('submit-key').addEventListener('click', async () => {
             const key = document.getElementById('access-key').value.trim();
             const success = await this.authService.checkAccessKey(key);
@@ -153,7 +169,7 @@ class SchoolPortalApp {
         this.stateManager.reset();
         this.authService.resetQuickLoginFlag();
         
-        // Добавляем кнопку быстрого входа
+        // Добавляем кнопку быстрого входа (только для старост и админов)
         this.authService.addQuickLoginButton();
     }
     
